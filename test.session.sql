@@ -1,2 +1,2 @@
 -- @BLOCK
-SELECT * FROM Users;
+SELECT * FROM follows;

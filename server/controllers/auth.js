@@ -7,7 +7,7 @@ const User = require('../models/user');
 //* HELPER FUNCTIONS
 
 const signToken = id =>
-  jwt.sign(id, process.env.JWT_SECRET, {
+  jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 
@@ -33,7 +33,7 @@ exports.signUp = catchAsync(async (req, res, next) => {
     firstName,
     lastName,
     username,
-    hashedPass,
+    password: hashedPass,
   });
 
   console.log('auto-generated ID:', newUser.id);
@@ -90,3 +90,10 @@ exports.protect = catchAsync(async (req, res, next) => {
   req.user = user;
   next();
 });
+
+exports.restrictTo = role => async (req, res, next) => {
+  if (role !== req.user.is_admin) {
+    return next('You do not have permission to perform this action');
+  }
+  next();
+};

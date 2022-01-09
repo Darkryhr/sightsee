@@ -1,5 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../utils/database');
+const Follow = require('./follow');
+const Vacation = require('./vacation');
 
 const User = sequelize.define('user', {
   id: {
@@ -30,5 +32,8 @@ const User = sequelize.define('user', {
     defaultValue: false,
   },
 });
+
+Vacation.belongsToMany(User, { through: Follow });
+User.hasMany(Follow);
 
 module.exports = User;
