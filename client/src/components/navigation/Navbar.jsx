@@ -6,10 +6,10 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className='bg-gray-50 sm:flex sm:justify-between sm:px-4 sm:py-3'>
+    <header className='bg-white sm:flex sm:justify-between sm:px-4 sm:py-3'>
       <div className='flex items-center justify-between  px-4 py-3 sm:p-0'>
         <div>
-          <img className='h-8' src={logo} alt='logo' />
+          <img className='h-6' src={logo} alt='logo' />
         </div>
         <div className='sm:hidden'>
           <button
@@ -33,7 +33,6 @@ const Navbar = () => {
           </button>
         </div>
       </div>
-
       <div
         className={`px-2 pb-4 pt-2 sm:flex sm:p-0 sm:items-center ${
           isOpen ? 'block' : 'hidden'
@@ -41,22 +40,24 @@ const Navbar = () => {
       >
         <a
           href='#'
-          className='block font-semibold hover:bg-gray-100 rounded px-2 py-1'
+          className='block font-bold text-md hover:bg-gray-100 rounded px-2 py-1'
         >
-          gsdgsdg
+          Browse
         </a>
         <a
           href='#'
-          className='block font-semibold hover:bg-gray-100 rounded px-2 py-1 mt-1 sm:mt-0 sm:ml-2'
+          className='block font-bold text-md hover:bg-gray-100 rounded px-2 py-1 mt-1 sm:mt-0 sm:ml-2'
         >
-          sdgsdg
+          About
         </a>
-        <a
-          href='#'
-          className='block font-semibold hover:bg-gray-100 rounded px-2 py-1 mt-1 sm:mt-0 sm:ml-2'
-        >
-          sdgsdgd
-        </a>
+        <div>
+          <button
+            type='button'
+            className='font-bold block text-sm bg-blue-700 mb-1 text-white px-5 py-2 rounded-full hover:bg-blue-400 sm:ml-4 mt-1 transition-all'
+          >
+            Login
+          </button>
+        </div>
       </div>
     </header>
   );
