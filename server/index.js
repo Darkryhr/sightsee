@@ -1,21 +1,27 @@
-const express = require('express');
-const cors = require('cors');
+require('dotenv').config();
 const sequelize = require('./utils/database');
 
-const app = express();
+process.on('uncaughtException', err => {
+  console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');
+  console.log(err.name, err.message);
+  process.exit(1);
+});
+
+const app = require('./app');
+
 sequelize
   .sync()
-  .then((res) => console.log(res))
-  .catch((err) => console.log(err));
+  .then(_ => console.log('Connected to database'))
+  .catch(err => console.log(err));
 
-app.use(express.json());
-app.use(cors());
-app.get('/', (req, res) => {
-  res.send('Hello World');
+const PORT = process.env.PORT || 8000;
+
+const server = app.listen(PORT, () => console.log('listening on port 3000'));
+
+process.on('unhandledRejection', err => {
+  console.log('UNHANDLED REJECTION! 💥 Shutting down...');
+  console.log(err.name, err.message);
+  server.close(() => {
+    process.exit(1);
+  });
 });
-
-app.get('*', (req, res) => {
-  res.send('path not found');
-});
-
-app.listen(3000, () => console.log('listening on port 3000'));

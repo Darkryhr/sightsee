@@ -8,6 +8,7 @@
   "parserOptions": {
     "ecmaVersion": 13
   },
+  "comma-dangle": ["warn", "always"],
   "rules": {
     "linebreak-style": 0
   }
