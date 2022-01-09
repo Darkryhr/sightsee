@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 
 const authRoute = require('./routes/auth');
+const vacationRoute = require('./routes/vacations');
 const app = express();
 
 //* MIDDLEWARES
@@ -15,6 +16,7 @@ app.use(cors());
 
 //* ROUTES
 
+app.use('/vacation', vacationRoute);
 app.use('/auth', authRoute);
 
 app.all('*', (req, res, next) => {

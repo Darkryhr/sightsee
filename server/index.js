@@ -3,7 +3,7 @@ const sequelize = require('./utils/database');
 
 process.on('uncaughtException', err => {
   console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');
-  console.log(err.name, err.message);
+  console.log(err);
   process.exit(1);
 });
 
@@ -16,7 +16,7 @@ sequelize
 
 const PORT = process.env.PORT || 8000;
 
-const server = app.listen(PORT, () => console.log('listening on port 3000'));
+const server = app.listen(PORT, () => console.log(`listening on port ${PORT}`));
 
 process.on('unhandledRejection', err => {
   console.log('UNHANDLED REJECTION! 💥 Shutting down...');
