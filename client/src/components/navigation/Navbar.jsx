@@ -1,15 +1,26 @@
 import React from 'react';
 import logo from './sightsee-logo.svg';
 import { useState } from 'react';
+import { BiSearch } from 'react-icons/bi';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className='bg-white sm:flex sm:justify-between sm:px-4 sm:py-3'>
+    <header className='bg-white sm:flex sm:justify-between sm:px-4 sm:py-3 container mx-auto'>
       <div className='flex items-center justify-between  px-4 py-3 sm:p-0'>
         <div>
-          <img className='h-6' src={logo} alt='logo' />
+          <img className='h-8' src={logo} alt='logo' />
+        </div>
+        <div className='ml-6  border-b-2 border-gray-400'>
+          <input
+            type='text'
+            className='focus:outline-none font-semibold text-sm'
+            placeholder='Search...'
+          />
+          <button>
+            <BiSearch />
+          </button>
         </div>
         <div className='sm:hidden'>
           <button

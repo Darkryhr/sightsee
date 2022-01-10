@@ -13,9 +13,13 @@ const Card = () => {
     end_date: '2021-12-28',
   };
   return (
-    <div className='bg-white shadow-md rounded-lg overflow-hidden max-w-sm cursor-pointer'>
-      <img className='w-full' src={vacation.img} alt={vacation.destination} />
-      <div className='p-6'>
+    <div className='bg-white shadow-lg hover:shadow-2xl transition-all hover:scale-105 rounded-lg overflow-hidden  max-w-xs cursor-pointer'>
+      <img
+        className='w-full max-w-xs'
+        src={vacation.img}
+        alt={vacation.destination}
+      />
+      <div className='p-4 '>
         <div className='flex items-center justify-between'>
           <h4 className='font-semibold text-lg leading-tight truncate mb-2'>
             {vacation.destination}
