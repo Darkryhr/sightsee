@@ -1,2 +1,2 @@
 -- @BLOCK
-SELECT * FROM follows;
+SELECT * FROM vacations;
