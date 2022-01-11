@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './sightsee-logo.svg';
 import { useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -62,12 +63,14 @@ const Navbar = () => {
           About
         </a>
         <div>
-          <button
-            type='button'
-            className='font-bold block text-sm bg-blue-700 mb-1 text-white px-5 py-2 rounded-full hover:bg-blue-400 sm:ml-4 mt-1 transition-all'
-          >
-            Login
-          </button>
+          <Link to='/login'>
+            <button
+              type='button'
+              className='font-bold block text-sm bg-blue-700 mb-1 text-white px-5 py-2 rounded-full hover:bg-blue-400 sm:ml-4 mt-1 transition-all'
+            >
+              Login
+            </button>
+          </Link>
         </div>
       </div>
     </header>
