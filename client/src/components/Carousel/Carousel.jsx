@@ -19,11 +19,20 @@ const Carousel = ({ vacations }) => {
     },
   };
   return (
-    <PluginCarousel responsive={responsive} className='p-10' infinite={true}>
-      {vacations.map((vacation) => (
-        <Card vacation={vacation} key={vacation.id} />
-      ))}
-    </PluginCarousel>
+    <div className='w-full mx-auto'>
+      <PluginCarousel
+        responsive={responsive}
+        className='px-2 pt-10'
+        infinite={true}
+        centerMode={true}
+        itemClass='carousel-item-padding-40px'
+        containerClass='margin-auto'
+      >
+        {vacations.map((vacation) => (
+          <Card vacation={vacation} key={vacation.id} />
+        ))}
+      </PluginCarousel>
+    </div>
   );
 };
 

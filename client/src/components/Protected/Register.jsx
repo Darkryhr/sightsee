@@ -1,10 +1,11 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-const Login = () => {
+const Register = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
 
@@ -18,28 +19,39 @@ const Login = () => {
       >
         <div className='mb-4'>
           <label className='block text-gray-700 text-sm font-bold mb-2'>
+            First Name
+          </label>
+          <input
+            {...register('fname')}
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+          />
+        </div>
+        <div className='mb-4'>
+          <label className='block text-gray-700 text-sm font-bold mb-2'>
+            Last Name
+          </label>
+          <input
+            {...register('lname')}
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+          />
+        </div>
+        <div className='mb-4'>
+          <label className='block text-gray-700 text-sm font-bold mb-2'>
             Username
           </label>
           <input
-            {...register('user', { required: true, maxLength: 20 })}
+            {...register('user')}
             className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
           />
-          {errors.user && (
-            <span className='text-xs text-red-500'>This field is required</span>
-          )}
         </div>
         <div className='mb-4'>
           <label className='block text-gray-700 text-sm font-bold mb-2'>
             Password
           </label>
           <input
-            type='password'
-            {...register('pass', { required: true, maxLength: 20 })}
+            {...register('pass')}
             className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
           />
-          {errors.pass && (
-            <span className='text-xs text-red-500'>This field is required</span>
-          )}
         </div>
         <div className='flex items-center justify-between mt-8'>
           <button
@@ -49,10 +61,10 @@ const Login = () => {
             Submit
           </button>
           <a
-            className='inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800'
+            class='inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800'
             href='#'
           >
-            Not a user yet?
+            Already a user?
           </a>
         </div>
       </form>
@@ -60,4 +72,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
