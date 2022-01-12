@@ -1,7 +1,6 @@
 import React from 'react';
 import logo from './sightsee-logo.svg';
 import { useState } from 'react';
-import { BiSearch } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
@@ -11,7 +10,9 @@ const Navbar = () => {
     <header className='bg-white sm:flex sm:justify-between sm:px-4 sm:py-6 container mx-auto'>
       <div className='flex items-center justify-between  px-4 py-3 sm:p-0'>
         <div>
-          <img className='h-8' src={logo} alt='logo' />
+          <Link to='/'>
+            <img className='h-8' src={logo} alt='logo' />
+          </Link>
         </div>
 
         <div className='sm:hidden'>
@@ -41,18 +42,19 @@ const Navbar = () => {
           isOpen ? 'block' : 'hidden'
         }`}
       >
-        <a
-          href='#'
+        <Link
           className='block font-bold text-md hover:bg-gray-100 rounded px-2 py-1'
+          to='/browse'
         >
           Browse
-        </a>
-        <a
-          href='#'
+        </Link>
+        <Link
           className='block font-bold text-md hover:bg-gray-100 rounded px-2 py-1 mt-1 sm:mt-0 sm:ml-2'
+          to='/about'
         >
           About
-        </a>
+        </Link>
+
         <div>
           <Link to='/login'>
             <button

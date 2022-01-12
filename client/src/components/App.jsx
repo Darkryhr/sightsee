@@ -3,11 +3,14 @@ import { useGetAllVacationsQuery } from '../services/vacations';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { BiSearch } from 'react-icons/bi';
 
-import Card from './Card/Card';
 import Footer from './navigation/Footer';
 import Navbar from './navigation/Navbar';
 import Carousel from './Carousel/Carousel';
 import Login from './Protected/Login';
+import Register from './Protected/Register';
+import NotFoundPage from './NotFound';
+import ProtectedRoute from './Protected/ProtectedRoute';
+import RequireAuth from './Protected/RequireAuth';
 
 const App = () => {
   return (
@@ -17,6 +20,16 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Main />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route
+            path='/browse'
+            element={
+              <RequireAuth>
+                <ProtectedRoute />
+              </RequireAuth>
+            }
+          />
+          <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </Router>
       <Footer />

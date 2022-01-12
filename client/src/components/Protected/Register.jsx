@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 const Register = () => {
   const {
@@ -8,8 +9,14 @@ const Register = () => {
     watch,
     formState: { errors },
   } = useForm();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const onSubmit = (data) => console.log(data);
+  let from = '/';
+
+  const onSubmit = (data) => {
+    navigate(from, { replace: true });
+  };
 
   return (
     <div className='w-full max-w-xs mx-auto'>
@@ -61,7 +68,7 @@ const Register = () => {
             Submit
           </button>
           <a
-            class='inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800'
+            className='inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800'
             href='#'
           >
             Already a user?

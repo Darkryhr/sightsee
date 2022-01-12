@@ -25,8 +25,8 @@ const Carousel = ({ vacations }) => {
         className='px-2 pt-10'
         infinite={true}
         centerMode={true}
-        itemClass='carousel-item-padding-40px'
-        containerClass='margin-auto'
+        itemclassName='carousel-item-padding-40px'
+        containerclassName='margin-auto'
       >
         {vacations.map((vacation) => (
           <Card vacation={vacation} key={vacation.id} />
