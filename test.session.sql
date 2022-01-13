@@ -1,2 +1,2 @@
 -- @BLOCK
-SELECT * FROM vacations;
+DROP TABLE users;

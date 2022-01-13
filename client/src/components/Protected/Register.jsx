@@ -1,6 +1,10 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import toast from 'react-hot-toast';
+
+import { setCredentials } from '../../redux/authSlice';
 
 const Register = () => {
   const {
@@ -9,13 +13,18 @@ const Register = () => {
     watch,
     formState: { errors },
   } = useForm();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
-
   let from = '/';
 
-  const onSubmit = (data) => {
-    navigate(from, { replace: true });
+  const onSubmit = async (data) => {
+    // try {
+    //   const user = await signUp(data).unwrap();
+    //   dispatch(setCredentials(user));
+    //   navigate(from, { replace: true });
+    // } catch (err) {
+    //   toast.error('Oh no, there was an error!');
+    // }
   };
 
   return (
@@ -29,7 +38,7 @@ const Register = () => {
             First Name
           </label>
           <input
-            {...register('fname')}
+            {...register('firstName')}
             className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
           />
         </div>
@@ -38,7 +47,7 @@ const Register = () => {
             Last Name
           </label>
           <input
-            {...register('lname')}
+            {...register('lastName')}
             className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
           />
         </div>
@@ -47,7 +56,7 @@ const Register = () => {
             Username
           </label>
           <input
-            {...register('user')}
+            {...register('username')}
             className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
           />
         </div>
@@ -56,7 +65,8 @@ const Register = () => {
             Password
           </label>
           <input
-            {...register('pass')}
+            type='password'
+            {...register('password')}
             className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
           />
         </div>

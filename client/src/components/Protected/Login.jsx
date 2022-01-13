@@ -1,6 +1,10 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setCredentials } from '../../redux/authSlice';
+import { useLoginMutation } from '../../services/auth';
+import toast from 'react-hot-toast';
 
 const Login = () => {
   const {
@@ -8,13 +12,21 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const [login, { isLoading }] = useLoginMutation();
 
   let from = location.state?.from?.pathname || '/';
 
-  const onSubmit = (data) => {
-    navigate(from, { replace: true });
+  const onSubmit = async (data) => {
+    try {
+      const user = await login(data).unwrap();
+      dispatch(setCredentials(user));
+      navigate(from, { replace: true });
+    } catch (error) {
+      toast('Oh no, there was an error!');
+    }
   };
 
   return (
@@ -28,7 +40,7 @@ const Login = () => {
             Username
           </label>
           <input
-            {...register('user', { required: true, maxLength: 20 })}
+            {...register('username', { required: true, maxLength: 20 })}
             className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
           />
           {errors.user && (
@@ -41,7 +53,7 @@ const Login = () => {
           </label>
           <input
             type='password'
-            {...register('pass', { required: true, maxLength: 20 })}
+            {...register('password', { required: true, maxLength: 20 })}
             className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
           />
           {errors.pass && (

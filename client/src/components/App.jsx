@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useGetAllVacationsQuery } from '../services/vacations';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { BiSearch } from 'react-icons/bi';
+import { Toaster } from 'react-hot-toast';
 
 import Footer from './navigation/Footer';
 import Navbar from './navigation/Navbar';
@@ -32,6 +33,7 @@ const App = () => {
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </Router>
+      <Toaster />
       <Footer />
     </>
   );
