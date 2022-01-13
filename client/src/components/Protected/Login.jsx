@@ -5,6 +5,8 @@ import { useDispatch } from 'react-redux';
 import { setCredentials } from '../../redux/authSlice';
 import { useLoginMutation } from '../../services/auth';
 import toast from 'react-hot-toast';
+import { useGetFollowedMutation } from '../../services/follow';
+import { setFollows } from '../../redux/followSlice';
 
 const Login = () => {
   const {
@@ -16,6 +18,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [login, { isLoading }] = useLoginMutation();
+  const [getFollows, { followIsLoading }] = useGetFollowedMutation();
 
   let from = location.state?.from?.pathname || '/';
 
@@ -23,9 +26,12 @@ const Login = () => {
     try {
       const user = await login(data).unwrap();
       dispatch(setCredentials(user));
+      const follows = await getFollows().unwrap();
+      dispatch(setFollows(follows.data.followed));
       navigate(from, { replace: true });
     } catch (error) {
-      toast('Oh no, there was an error!');
+      console.log(error);
+      toast.error('Oh no, there was an error!');
     }
   };
 

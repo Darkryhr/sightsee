@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useGetAllVacationsQuery } from '../services/vacations';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { BiSearch } from 'react-icons/bi';
@@ -43,7 +43,6 @@ export default App;
 
 const Main = () => {
   const { data, error, isLoading } = useGetAllVacationsQuery();
-
   return (
     <main className='container mx-auto'>
       <div className='bg-gray-100 w-full flex items-center '>

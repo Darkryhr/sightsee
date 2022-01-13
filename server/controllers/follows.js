@@ -22,12 +22,15 @@ exports.removeVacation = catchAsync(async (req, res) => {
 });
 
 exports.getFollowed = catchAsync(async (req, res) => {
-  const result = Follow.findAll({
+  const result = await Follow.findAll({
     where: {
       userId: req.user.id,
     },
   });
-  const followed = result.map(follow => follow.id);
+  let followed = [];
+  if (result.length) {
+    followed = result.map(follow => follow.vacationId);
+  }
   res.status(201).json({
     message: 'success',
     data: {

@@ -24,6 +24,7 @@ const Register = () => {
     try {
       const user = await signUp(data).unwrap();
       dispatch(setCredentials(user));
+      dispatch(setFollows([]));
       navigate(from, { replace: true });
     } catch (error) {
       toast('Oh no, there was an error!');

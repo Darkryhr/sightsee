@@ -1,7 +1,35 @@
 import React from 'react';
 import { format } from 'date-fns';
+import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { addFollow, removeFollow } from '../../redux/followSlice';
+import { useAddToMutation, useRemoveFromMutation } from '../../services/follow';
 
-const Card = ({ vacation }) => {
+const Card = ({ vacation, following }) => {
+  const dispatch = useDispatch();
+  const [addingFollow] = useAddToMutation();
+  const [removingFollow] = useRemoveFromMutation();
+  const follow = async (id) => {
+    try {
+      await addingFollow(id);
+      dispatch(addFollow(id));
+    } catch (error) {
+      console.log(error);
+      toast.error('Oh no, there was an error!');
+    }
+  };
+
+  const unfollow = async (id) => {
+    console.log(id);
+    try {
+      await removingFollow(id);
+      dispatch(removeFollow(id));
+    } catch (error) {
+      console.log(error);
+      toast.error('Oh no, there was an error!');
+    }
+  };
+
   return (
     <div className='bg-white shadow-lg hover:shadow-2xl transition-all hover:scale-105 rounded-lg max-w-xs overflow-hidden mx-2 border-gray-200 border'>
       <div className=''>
@@ -28,7 +56,17 @@ const Card = ({ vacation }) => {
             ${vacation.price}
             <span className='text-gray-600 text-sm'></span>
           </div>
-          <span className=' text-gray-600 text-sm'>follow</span>
+          {following ? (
+            <button onClick={() => unfollow(vacation.id)}>
+              <span className=' text-red-600 text-sm font-semibold'>
+                Following
+              </span>
+            </button>
+          ) : (
+            <button onClick={() => follow(vacation.id)}>
+              <span className=' text-gray-600 text-sm'>Follow</span>
+            </button>
+          )}
         </div>
       </div>
     </div>
