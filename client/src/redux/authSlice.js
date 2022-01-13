@@ -8,10 +8,14 @@ const slice = createSlice({
       state.user = data.user;
       state.token = token;
     },
+    clearCredentials: (state) => {
+      state.user = null;
+      state.token = null;
+    },
   },
 });
 
-export const { setCredentials } = slice.actions;
+export const { setCredentials, clearCredentials } = slice.actions;
 
 export default slice.reducer;
 

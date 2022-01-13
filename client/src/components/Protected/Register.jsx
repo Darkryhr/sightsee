@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useSignUpMutation } from '../../services/auth';
 import toast from 'react-hot-toast';
 
 import { setCredentials } from '../../redux/authSlice';
@@ -15,16 +16,18 @@ const Register = () => {
   } = useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [signUp, { isLoading }] = useSignUpMutation();
+
   let from = '/';
 
   const onSubmit = async (data) => {
-    // try {
-    //   const user = await signUp(data).unwrap();
-    //   dispatch(setCredentials(user));
-    //   navigate(from, { replace: true });
-    // } catch (err) {
-    //   toast.error('Oh no, there was an error!');
-    // }
+    try {
+      const user = await signUp(data).unwrap();
+      dispatch(setCredentials(user));
+      navigate(from, { replace: true });
+    } catch (error) {
+      toast('Oh no, there was an error!');
+    }
   };
 
   return (

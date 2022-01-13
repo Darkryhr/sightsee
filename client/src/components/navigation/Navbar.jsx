@@ -2,9 +2,27 @@ import React from 'react';
 import logo from './sightsee-logo.svg';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearCredentials } from '../../redux/authSlice';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  const logout = () => {
+    try {
+      dispatch(clearCredentials());
+      toast('Goodbye 👋');
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+      toast('Oh no, there was an error!');
+    }
+  };
 
   return (
     <header className='bg-white sm:flex sm:justify-between sm:px-4 sm:py-6 container mx-auto'>
@@ -56,14 +74,24 @@ const Navbar = () => {
         </Link>
 
         <div>
-          <Link to='/login'>
+          {auth.user ? (
             <button
               type='button'
+              onClick={() => logout()}
               className='font-bold block text-sm bg-blue-700 mb-1 text-white px-5 py-2 rounded-full hover:bg-blue-400 sm:ml-4 mt-1 transition-all'
             >
-              Login
+              Logout
             </button>
-          </Link>
+          ) : (
+            <Link to='/login'>
+              <button
+                type='button'
+                className='font-bold block text-sm bg-blue-700 mb-1 text-white px-5 py-2 rounded-full hover:bg-blue-400 sm:ml-4 mt-1 transition-all'
+              >
+                Login
+              </button>
+            </Link>
+          )}
         </div>
       </div>
     </header>
