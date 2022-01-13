@@ -6,6 +6,7 @@ import Card from '../Card/Card';
 const ProtectedRoute = () => {
   const { data, error, isLoading } = useGetAllVacationsQuery();
   const follows = useSelector((state) => state.follows);
+
   return (
     <>
       {error ? (
