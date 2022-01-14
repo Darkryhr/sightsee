@@ -45,7 +45,7 @@ const Main = () => {
   const { data, error, isLoading } = useGetAllVacationsQuery();
   return (
     <main className='container mx-auto'>
-      <div className='bg-gray-100 w-full flex items-center '>
+      <div className='w-full flex items-center '>
         <div className='md:px-10 md:py-10 p-8 relative'>
           <img
             src='https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80'

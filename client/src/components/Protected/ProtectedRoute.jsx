@@ -14,8 +14,8 @@ const ProtectedRoute = () => {
       ) : isLoading ? (
         <h1>Loading...</h1>
       ) : data ? (
-        <div className='container my-12 mx-auto px-4 md:px-12'>
-          <div className='flex flex-wrap -mx-1 lg:-mx-4'>
+        <div className='w-fit mx-auto'>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-12'>
             {data.data.vacations.map((vacation) => (
               <Card
                 vacation={vacation}

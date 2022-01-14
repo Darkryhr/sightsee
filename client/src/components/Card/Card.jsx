@@ -58,13 +58,15 @@ const Card = ({ vacation, following }) => {
           </div>
           {following ? (
             <button onClick={() => unfollow(vacation.id)}>
-              <span className=' text-red-600 text-sm font-semibold'>
+              <span className='text-red-400 font-semibold text-sm border-2 border-red-400 rounded-full py-1 px-3 leading-snug	tracking-tight hover:bg-gray-100'>
                 Following
               </span>
             </button>
           ) : (
             <button onClick={() => follow(vacation.id)}>
-              <span className=' text-gray-600 text-sm'>Follow</span>
+              <span className=' text-gray-500 text-sm font-semibold rounded hover:bg-gray-200 px-3 py-2'>
+                Follow
+              </span>
             </button>
           )}
         </div>
