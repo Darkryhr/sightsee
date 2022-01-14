@@ -1,9 +1,12 @@
 const catchAsync = require('../utils/catchAsync');
 const Follow = require('../models/follow');
+<<<<<<< HEAD
 const AppError = require('../utils/appError');
+=======
+const cache = require('../utils/cache');
+>>>>>>> cache
 
 exports.followVacation = catchAsync(async (req, res) => {
-  // console.log(req.params);
   await Follow.create({
     vacationId: req.params.id,
     userId: req.user.id,
@@ -22,19 +25,25 @@ exports.removeVacation = catchAsync(async (req, res) => {
 });
 
 exports.getFollowed = catchAsync(async (req, res) => {
-  const result = await Follow.findAll({
-    where: {
-      userId: req.user.id,
-    },
-  });
-  let followed = [];
-  if (result.length) {
-    followed = result.map(follow => follow.vacationId);
+  if (
+    !cache.has(`${req.user.id}_followed`) ||
+    cache.isExpired(`${req.user.id}_followed`, 60)
+  ) {
+    const result = await Follow.findAll({
+      where: {
+        userId: req.user.id,
+      },
+    });
+    let followed = [];
+    if (result.length) {
+      followed = result.map(follow => follow.vacationId);
+    }
+    cache.set(`${req.user.id}_followed`, followed);
   }
   res.status(201).json({
     message: 'success',
     data: {
-      followed,
+      followed: cache.get(`${req.user.id}_followed`),
     },
   });
 });
