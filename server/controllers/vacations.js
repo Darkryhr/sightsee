@@ -1,22 +1,32 @@
 const Vacation = require('../models/vacation');
 const catchAsync = require('../utils/catchAsync');
+const cache = require('../utils/cache');
 
 exports.getAllVacations = catchAsync(async (req, res) => {
-  const vacations = await Vacation.findAll();
+  if (cache.has('vacations') || cache.isExpired('vacations', 60)) {
+    const vacations = await Vacation.findAll();
+    cache.set('vacations', vacations);
+  }
   res.status(200).json({
     message: 'success',
     data: {
-      vacations,
+      vacations: cache.get('vacations'),
     },
   });
 });
 
 exports.getOneVacation = catchAsync(async (req, res) => {
-  const vacation = await Vacation.findByPk(req.params.id);
+  if (
+    !cache.has(`vacation_${req.params.id}`) ||
+    cache.isExpired(`vacation_${req.params.id}`)
+  ) {
+    const vacation = await Vacation.findByPk(req.params.id);
+    cache.set(`vacation_${req.params.id}`, vacation);
+  }
   res.status(200).json({
     message: 'success',
     data: {
-      vacation,
+      vacation: cache.get(`vacation_${req.params.id}`),
     },
   });
 });
