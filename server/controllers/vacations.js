@@ -1,5 +1,6 @@
 const Vacation = require('../models/vacation');
 const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/appError');
 
 exports.getAllVacations = catchAsync(async (req, res) => {
   const vacations = await Vacation.findAll();

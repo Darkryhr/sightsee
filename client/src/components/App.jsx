@@ -12,6 +12,7 @@ import Register from './Protected/Register';
 import NotFoundPage from './NotFound';
 import ProtectedRoute from './Protected/ProtectedRoute';
 import RequireAuth from './Protected/RequireAuth';
+import About from './about/About';
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
               </RequireAuth>
             }
           />
+          <Route path='/about' element={<About />} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </Router>

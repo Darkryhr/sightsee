@@ -1,6 +1,6 @@
 const catchAsync = require('../utils/catchAsync');
 const Follow = require('../models/follow');
-// const Follow = require()
+const AppError = require('../utils/appError');
 
 exports.followVacation = catchAsync(async (req, res) => {
   // console.log(req.params);

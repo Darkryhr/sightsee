@@ -5,6 +5,8 @@ const cors = require('cors');
 const authRoute = require('./routes/auth');
 const vacationRoute = require('./routes/vacations');
 const followRoute = require('./routes/follows');
+const AppError = require('./utils/appError');
+const globalErrorHandler = require('./controllers/error');
 const app = express();
 
 //* MIDDLEWARES
@@ -22,7 +24,9 @@ app.use('/follow', followRoute);
 app.use('/vacation', vacationRoute);
 
 app.all('*', (req, res, next) => {
-  next(`Can't find ${req.originalUrl} on this server!`);
+  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
+
+app.use(globalErrorHandler);
 
 module.exports = app;

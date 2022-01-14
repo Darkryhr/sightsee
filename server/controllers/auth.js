@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const catchAsync = require('../utils/catchAsync');
 const User = require('../models/user');
+const AppError = require('../utils/appError');
 
 //* HELPER FUNCTIONS
 
@@ -25,7 +26,7 @@ exports.signUp = catchAsync(async (req, res, next) => {
     },
   });
 
-  if (exists) return next('This username already exists');
+  if (exists) return next(new AppError('This username already exists', 401));
 
   const hashedPass = await bcrypt.hash(password, 12);
 
@@ -57,7 +58,7 @@ exports.login = catchAsync(async (req, res, next) => {
   });
 
   if (!user || !(await passwordCompare(password, user.password)))
-    return next('Incorrect CREDS');
+    return next(new AppError('Incorrect credentials', 401));
 
   const token = signToken(user.id);
 
@@ -77,8 +78,8 @@ exports.protect = catchAsync(async (req, res, next) => {
     req.headers.authorization.startsWith('Bearer')
   )
     token = req.headers.authorization.split(' ')[1];
-  else return next('Unauthorized');
-  if (!token) return next('no token');
+  else return next(new AppError('No Token', 400));
+  if (!token) return next(new AppError('No Token', 400));
 
   //* 2. verify token
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
@@ -93,7 +94,9 @@ exports.protect = catchAsync(async (req, res, next) => {
 
 exports.restrictTo = role => async (req, res, next) => {
   if (role !== req.user.is_admin) {
-    return next('You do not have permission to perform this action');
+    return next(
+      new AppError('You do not have permission to perform this action', 403)
+    );
   }
   next();
 };
