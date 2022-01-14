@@ -1,10 +1,7 @@
 const catchAsync = require('../utils/catchAsync');
 const Follow = require('../models/follow');
-<<<<<<< HEAD
 const AppError = require('../utils/appError');
-=======
 const cache = require('../utils/cache');
->>>>>>> cache
 
 exports.followVacation = catchAsync(async (req, res) => {
   await Follow.create({

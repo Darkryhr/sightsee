@@ -1,10 +1,7 @@
 const Vacation = require('../models/vacation');
 const catchAsync = require('../utils/catchAsync');
-<<<<<<< HEAD
 const AppError = require('../utils/appError');
-=======
 const cache = require('../utils/cache');
->>>>>>> cache
 
 exports.getAllVacations = catchAsync(async (req, res) => {
   if (cache.has('vacations') || cache.isExpired('vacations', 60)) {
