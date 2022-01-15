@@ -13,7 +13,9 @@ const Register = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    mode: 'onBlur',
+  });
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [signUp, { isLoading }] = useSignUpMutation();
@@ -30,6 +32,8 @@ const Register = () => {
     }
   };
 
+  console.log(errors);
+
   return (
     <div className='w-full max-w-xs mx-auto'>
       <form
@@ -41,27 +45,60 @@ const Register = () => {
             First Name
           </label>
           <input
-            {...register('firstName')}
-            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            {...register('firstName', {
+              required: true,
+              pattern: /^[A-Za-z]+$/i,
+            })}
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-1'
           />
+          {errors.firstName?.type === 'required' && (
+            <span className='text-xs text-red-500'>This field is required</span>
+          )}
+          {errors.firstName?.type === 'pattern' && (
+            <span className='text-xs text-red-500 '>
+              This field should not contain any numbers or special characters
+            </span>
+          )}
         </div>
         <div className='mb-4'>
           <label className='block text-gray-700 text-sm font-bold mb-2'>
             Last Name
           </label>
           <input
-            {...register('lastName')}
-            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            {...register('lastName', {
+              required: true,
+              pattern: /^[A-Za-z]+$/i,
+            })}
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-1'
           />
+          {errors.lastName?.type === 'required' && (
+            <span className='text-xs text-red-500'>This field is required</span>
+          )}
+          {errors.lastName?.type === 'pattern' && (
+            <span className='text-xs text-red-500'>
+              This field should not contain any numbers or special characters
+            </span>
+          )}
         </div>
         <div className='mb-4'>
           <label className='block text-gray-700 text-sm font-bold mb-2'>
             Username
           </label>
           <input
-            {...register('username')}
-            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            {...register('username', {
+              required: true,
+              minLength: 6,
+            })}
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-1'
           />
+          {errors.username?.type === 'required' && (
+            <span className='text-xs text-red-500'>This field is required</span>
+          )}
+          {errors.username?.type === 'minLength' && (
+            <span className='text-xs text-red-500'>
+              Username must be at least 6 characters long
+            </span>
+          )}
         </div>
         <div className='mb-4'>
           <label className='block text-gray-700 text-sm font-bold mb-2'>
@@ -69,9 +106,27 @@ const Register = () => {
           </label>
           <input
             type='password'
-            {...register('password')}
-            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            {...register('password', {
+              required: true,
+              minLength: 8,
+              pattern:
+                /^(?=.*[A-Za-z])(?=.*d)(?=.*[@$!%*#?&])[A-Za-zd@$!%*#?&]{8,}$/,
+            })}
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-1'
           />
+          {errors.password?.type === 'required' && (
+            <span className='text-xs text-red-500'>This field is required</span>
+          )}
+          {errors.password?.type === 'minLength' && (
+            <span className='text-xs text-red-500'>
+              Password must contain minimum 8 characters
+            </span>
+          )}
+          {errors.password?.type === 'pattern' && (
+            <span className='text-xs text-red-500'>
+              Password at least one letter, one number and one special character
+            </span>
+          )}
         </div>
         <div className='flex items-center justify-between mt-8'>
           <button
