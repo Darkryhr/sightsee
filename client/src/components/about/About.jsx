@@ -8,15 +8,30 @@ const About = () => {
           Hi there! I&apos;m Gabriel ✌️
         </h3>
         <p className='text-gray-600'>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-          Reprehenderit consectetur ullam tempore! Quam sapiente magni fugiat
-          praesentium. Temporibus deleniti vitae tempora dicta id mollitia vero
-          beatae nobis. Magnam nihil amet architecto ipsa vero voluptas minima
-          recusandae, tenetur sequi maxime nisi debitis cumque officia, unde
-          perspiciatis mollitia eligendi eveniet, incidunt a.
+          I'm a Fullstack Web Developer, this project is a revamp...remaster?
+          refactor? well whatever it is it&apos;s fresh and built with lots of
+          neat stuff i&apos;ve been learning, first and foremost -{' '}
+          <span className='text-blue-700 font-semibold'>
+            Redux toolkit and RTK query
+          </span>{' '}
+          on the state management,{' '}
+          <span className='text-indigo-800 font-bold'>Tailwind CSS</span> on the
+          styling, <span className='text-green-600 font-semibold'>Express</span>{' '}
+          on the backend and{' '}
+          <span className='font-light text-lg'>Sequelize ORM</span> for database
+          management
+          <br />
+          <span className='font-semibold text-gray-800'>
+            If you&apos;d like to check out my existence, feel free to reach
+            out:
+          </span>
         </p>
         <div className='flex justify-center mt-10'>
-          <a href='#!' className='mr-20 text-indigo-700'>
+          <a
+            href='https://twitter.com/GabrielAintReal'
+            className='mr-20 text-indigo-700'
+            target='_blank'
+          >
             <svg
               aria-hidden='true'
               focusable='false'
@@ -33,7 +48,12 @@ const About = () => {
               ></path>
             </svg>
           </a>
-          <a href='#!' className='mr-20 text-indigo-700'>
+          <a
+            href='mailto:lellouchegabriel04@gmail.com
+'
+            target='_blank'
+            className='mr-20 text-indigo-700'
+          >
             <svg
               aria-hidden='true'
               focusable='false'
@@ -50,7 +70,11 @@ const About = () => {
               ></path>
             </svg>
           </a>
-          <a href='#!' className='mr-20 text-indigo-700'>
+          <a
+            href='https://www.instagram.com/crck_dome/'
+            className='mr-20 text-indigo-700'
+            target='_blank'
+          >
             <svg
               aria-hidden='true'
               focusable='false'
@@ -67,7 +91,12 @@ const About = () => {
               ></path>
             </svg>
           </a>
-          <a href='#!' className='mr-20 text-indigo-700'>
+          <a
+            href='https://www.linkedin.com/in/gabriellellouche
+'
+            target='_blank'
+            className='mr-20 text-indigo-700'
+          >
             <svg
               aria-hidden='true'
               focusable='false'
@@ -84,7 +113,11 @@ const About = () => {
               ></path>
             </svg>
           </a>
-          <a href='#!' className='text-indigo-700'>
+          <a
+            href='https://github.com/Darkryhr'
+            target='_blank'
+            className='text-indigo-700'
+          >
             <svg
               aria-hidden='true'
               focusable='false'

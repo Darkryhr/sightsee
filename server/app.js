@@ -19,9 +19,9 @@ app.use(cors());
 
 //* ROUTES
 
-app.use('/auth', authRoute);
-app.use('/follow', followRoute);
-app.use('/vacation', vacationRoute);
+app.use('/api/vacation', vacationRoute);
+app.use('/api/auth', authRoute);
+app.use('/api/follow', followRoute);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

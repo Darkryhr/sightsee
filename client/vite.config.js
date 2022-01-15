@@ -6,17 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/vacation': {
-        target: 'http://localhost:8000',
-        changeOrigin: true,
-        secure: false,
-      },
-      '/auth': {
-        target: 'http://localhost:8000',
-        changeOrigin: true,
-        secure: false,
-      },
-      '/follow': {
+      '/api': {
         target: 'http://localhost:8000',
         changeOrigin: true,
         secure: false,
