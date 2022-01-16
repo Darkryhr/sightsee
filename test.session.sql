@@ -1,2 +1,0 @@
--- @BLOCK
-DROP TABLE users;
