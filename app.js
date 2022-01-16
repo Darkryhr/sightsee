@@ -20,13 +20,15 @@ app.use(cors());
 
 //* ROUTES
 
-app.use(express.static(path.resolve(__dirname, '../client/dist/index.html')));
+app.use(
+  express.static(path.resolve(__dirname, '../client/dist', 'index.html'))
+);
 app.use('/auth', authRoute);
 app.use('/follow', followRoute);
 app.use('/vacation', vacationRoute);
 
-app.all('*', (req, res, next) => {
-  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client/dist', 'index.html'));
 });
 
 app.use(globalErrorHandler);
