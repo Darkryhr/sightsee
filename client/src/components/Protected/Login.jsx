@@ -13,7 +13,9 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    mode: 'onBlur',
+  });
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -34,7 +36,7 @@ const Login = () => {
       toast.error('Oh no, there was an error!');
     }
   };
-
+  console.log(errors);
   return (
     <div className='w-full max-w-xs mx-auto'>
       <form
@@ -46,10 +48,10 @@ const Login = () => {
             Username
           </label>
           <input
-            {...register('username', { required: true, maxLength: 20 })}
+            {...register('username', { required: true })}
             className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
           />
-          {errors.user && (
+          {errors.username && (
             <span className='text-xs text-red-500'>This field is required</span>
           )}
         </div>
@@ -59,10 +61,10 @@ const Login = () => {
           </label>
           <input
             type='password'
-            {...register('password', { required: true, maxLength: 20 })}
+            {...register('password', { required: true })}
             className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
           />
-          {errors.pass && (
+          {errors.password && (
             <span className='text-xs text-red-500'>This field is required</span>
           )}
         </div>

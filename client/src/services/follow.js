@@ -1,27 +1,16 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { emptySplitApi } from './api';
 
-export const followsApi = createApi({
-  reducerPath: 'followsApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: '/follow',
-    prepareHeaders: (headers, { getState }) => {
-      const token = getState().auth.token;
-      if (token) {
-        headers.set('authorization', `Bearer ${token}`);
-      }
-      return headers;
-    },
-  }),
+const followsApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
     getFollowed: builder.mutation({
-      query: () => '/',
+      query: () => '/follow',
     }),
     addTo: builder.mutation({
-      query: (id) => `/${id}`,
+      query: (id) => `/follow/${id}`,
     }),
     removeFrom: builder.mutation({
       query: (id) => ({
-        url: `/${id}`,
+        url: `/follow/${id}`,
         method: 'DELETE',
       }),
     }),

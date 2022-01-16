@@ -1,7 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
-const path = require('path');
 
 const authRoute = require('./routes/auth');
 const vacationRoute = require('./routes/vacations');
@@ -20,10 +19,9 @@ app.use(cors());
 
 //* ROUTES
 
-app.use(express.static(path.resolve(__dirname, '../client/build')));
-app.use('/auth', authRoute);
-app.use('/follow', followRoute);
-app.use('/vacation', vacationRoute);
+app.use('/api/vacation', vacationRoute);
+app.use('/api/auth', authRoute);
+app.use('/api/follow', followRoute);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

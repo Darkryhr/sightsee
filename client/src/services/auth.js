@@ -1,29 +1,17 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { emptySplitApi } from './api';
 
-export const authApi = createApi({
-  reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: '/auth',
-    prepareHeaders: (headers, { getState }) => {
-      // By default, if we have a token in the store, let's use that for authenticated requests
-      const token = getState().auth.token;
-      if (token) {
-        headers.set('authorization', `Bearer ${token}`);
-      }
-      return headers;
-    },
-  }),
+const authApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (credentials) => ({
-        url: 'login',
+        url: 'auth/login',
         method: 'POST',
         body: credentials,
       }),
     }),
     signUp: builder.mutation({
       query: (credentials) => ({
-        url: 'register',
+        url: 'auth/register',
         method: 'POST',
         body: credentials,
       }),

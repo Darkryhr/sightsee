@@ -1,13 +1,9 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { emptySplitApi } from './api';
 
-export const vacationsApi = createApi({
-  reducerPath: 'vacationsApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: '/vacation',
-  }),
+const vacationsApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllVacations: builder.query({
-      query: () => '/',
+      query: () => '/vacation',
     }),
   }),
 });
