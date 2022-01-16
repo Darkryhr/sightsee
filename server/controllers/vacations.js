@@ -4,7 +4,7 @@ const AppError = require('../utils/appError');
 const cache = require('../utils/cache');
 
 exports.getAllVacations = catchAsync(async (req, res) => {
-  if (cache.has('vacations') || cache.isExpired('vacations', 60)) {
+  if (!cache.has('vacations') || cache.isExpired('vacations', 60)) {
     const vacations = await Vacation.findAll();
     cache.set('vacations', vacations);
   }
