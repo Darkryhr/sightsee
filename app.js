@@ -20,7 +20,7 @@ app.use(cors());
 
 //* ROUTES
 
-app.use(express.static(path.resolve(__dirname, '../client/build')));
+app.use(express.static(path.resolve(__dirname, '../client/dist')));
 app.use('/auth', authRoute);
 app.use('/follow', followRoute);
 app.use('/vacation', vacationRoute);
